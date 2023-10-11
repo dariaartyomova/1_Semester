@@ -4,7 +4,7 @@ int main()
 {
     int n;
     std::cin >> n;
-    int mas[20000];
+    int mas[10000];
     int count = 0;
     int k = 2;
     int flag = 0;
