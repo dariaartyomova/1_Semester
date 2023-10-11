@@ -1,0 +1,96 @@
+#include <iostream>
+#include <cmath>
+
+
+int main()
+{
+    
+    int n;
+    std::cin >> n;
+    int mas[20000];
+    int k = 2;
+    int count = 0;
+
+
+    for (int i = 0; i < n; i++)
+    {
+        std::cin >> mas[i];
+    }
+
+    
+
+    int i = 0;
+    
+    while (i < n)
+    {
+        int tmp = mas[i];
+        int rat = 0;
+        int countm = 0;
+        while (tmp > 0)
+        {
+            countm += 1;
+            tmp = tmp / 10;
+        }
+     
+
+        int r = 0;
+        int h = countm/2;
+        while(r < h)
+        {
+            int h1 = mas[i] / (pow(10, (countm - r - 1)));
+            int h2 = mas[i] / (pow(10, r));
+            std::cout << h1 << std::endl;
+            std::cout << h2%10 << std::endl;
+            if (h1 == h2 % 10)
+            {
+                rat = rat + 1;
+            }
+            r++;
+        }
+        
+        if (rat == countm/2)
+        {
+            for (int j = i + 1; j < n; j++)
+            {
+                mas[j - 1] = mas[j];
+            }
+            n--;
+        }
+        else
+            i++;
+
+            
+    }
+    i = 0;
+    while (i < n)
+    {
+        while (k * k <= mas[i])
+        {
+            if (mas[i] % k == 0)
+            {
+                count++;
+            }
+            k++;
+        }
+        
+        if (count == 0)
+        {
+            for (int j = n; j > i; j--)
+                mas[j] = mas[j - 1];
+            n++;
+            i++;
+
+        }
+        i++;
+        k = 2;
+        count = 0;
+    }
+    
+
+    for (int i = 0; i < n; i++)
+    {
+        std::cout << mas[i] << " ";
+    }
+
+    return 0;
+}
