@@ -37,7 +37,7 @@ namespace mt
 	bool TwoPrimeExistsInMatrix(int matrix[N_Max][N_Max], int n, int m)
 	{
 
-		int Kprime = 0; //количество простых
+		int Kprime = 0; //РєРѕР»РёС‡РµСЃС‚РІРѕ РїСЂРѕСЃС‚С‹С…
 		for (int i = 0; i < n; i++)
 		{
 			for (int j = 0; j < m; j++)
@@ -64,7 +64,7 @@ namespace mt
 	}
 	bool isOneMoreMinElem(int matrix[N_Max][N_Max], int n, int m, int MinElems)
 	{
-		int kOneMoreMinElem = 0; // количество еще одних миимальных элементов
+		int kOneMoreMinElem = 0; // РєРѕР»РёС‡РµСЃС‚РІРѕ РµС‰Рµ РѕРґРЅС… РјРёРЅРёРјР°Р»СЊРЅС‹С… СЌР»РµРјРµРЅС‚РѕРІ
 		for (int i = 0; i < n; i++)
 		{
 			for (int j = 0; j < m; j++)
