@@ -178,6 +178,7 @@ int main()
 {
     setlocale(LC_ALL, "Rus");
     std::ifstream in("cat.txt");
+    std::ofstream out("output.txt", std::ios::app);
     if (!in.is_open())
     {
         std::cout << "Err";
@@ -280,7 +281,7 @@ int main()
             if (flag == 1)
                 if ((maxlet - k) == strlen(words[i]))
                     if (mt::WordIsUniq(words, n, i))
-                        std::cout << words[i] << std::endl;
+                        out << words[i] << std::endl;
         }
 
     }
