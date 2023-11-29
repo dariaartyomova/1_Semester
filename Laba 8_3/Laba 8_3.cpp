@@ -5,6 +5,7 @@
 #include <string>
 #include <set>
 
+
 namespace mt
 {
 
@@ -71,16 +72,7 @@ namespace mt
         return false;
     }
 
-    bool isVowel(char c)
-    {
-        c = tolower(c);
-        char vowels[11] = { 'а', 'у', 'е', 'э', 'о', 'ы', 'я', 'и', 'ю', 'ё' };
 
-        for (int i = 0; i < strlen(vowels); i++)
-            if (c == vowels[i])
-                return true;
-        return false;
-    }
 
     void splitText(char text[1000], char words[500][50], int& n)
     {
@@ -112,73 +104,6 @@ namespace mt
 
 
 
-    int numOfVolews(char word[50])
-    {
-        int result = 0;
-        for (int i = 0; i < strlen(word); i++)
-            if (isVowel(word[i]))
-                result++;
-        return result;
-    }
-
-    bool isConsonant(char c)
-    {
-        c = tolower(c);
-        char consonant[22] = { 'ц', 'к', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ф', 'в', 'п', 'р', 'л', 'д', 'ж', 'б', 'т', 'м', 'с', 'ч', 'й' };
-
-        for (int i = 0; i < strlen(consonant); i++)
-            if (c == consonant[i])
-                return true;
-        return false;
-    }
-
-    void duplicateConsonant(char word[50])
-    {
-        for (int i = 0; i < strlen(word); i++)
-        {
-            if (mt::isConsonant(word[i]))
-            {
-                for (int j = strlen(word) + 1; j >= i; j--)
-                    word[j + 1] = word[j];
-                i++;
-            }
-        }
-    }
-
-    void removeVowels(char word[50])
-    {
-        for (int i = 0; i < mt::strlen(word); i++)
-        {
-            if (mt::isVowel(word[i]))
-            {
-                for (int j = i; j <= strlen(word); j++)
-                    word[j] = word[j + 1];
-                i--;
-            }
-        }
-    }
-
-    bool WordIsUniq(char words[500][50], int n, int i)
-    {
-        int fl = 0; // количество одинаковых слов
-        for (int t = 0; t < n; t++)
-        {
-            int f = 0; // одинаковые буквы
-            if (strlen(words[i]) == strlen(words[t]))
-                for (int j = 0; j < strlen(words[i]); j++)
-                {
-                    if (words[t][j] == words[i][j])
-                        f++;
-                }
-            if (strlen(words[i]) == f)
-                fl++;
-        }
-        if (fl == 1)
-            return true;
-        else
-            return false;
-    }
-
 
 
 }
@@ -194,46 +119,67 @@ int main()
         return 0;
     }
     std::ofstream out("output.txt", std::ios::app);
+
     char text[20000];
     in.getline(text, 1000);
     int size = 0;
     int n = 0;
-
-    out << text << std::endl;
-
-
+    std::cout << text << std::endl;
 
     char word[50];
-
     char words[500][50];
-
     mt::splitText(text, words, n);
+
+
+
+    std::string strtext(text);
 
     
 
+
     for (int i = 0; i < n; i++)
     {
-        
+        std::string strwords;
+        std::string strwor;
+        std::string strletter;
+        bool flag = 0;
+        for (int j = 0; j < strlen(words[i]); j++)
+            strwor += words[i][j];
         for (int j = 0; j < strlen(words[i]-1); j++)
         {
+            
             if (words[i][j] == words[i][j + 1])
             {
                 words[i][j] = mt::togrow(words[i][j]);
                 words[i][j + 1] = mt::togrow(words[i][j + 1]);
+                flag = 1;
+                strletter += words[i][j];
                 
-
-               
-                out << words[i] << "(" << words[i][j] << ")" << std::endl;
             }
+           
+        }
+        
+        if (flag == 1)
+        {
+            for (int j = 0; j < strlen(words[i] - 1); j++)
+            {
+                strwords += words[i][j];
+
+            }
+           
+            
+            size_t found = strtext.find(strwor);
+            if (found != std::string::npos)
+            {
+                strtext.replace(found, strwords.length(), strwords + "(" + strletter + ")");
+            }
+               
             
         }
-       
+    
     }
 
+    out << strtext << std::endl;
 
-
-    
     return 0;
 }
-
-
